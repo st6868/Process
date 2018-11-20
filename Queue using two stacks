@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    stack<int> front,rear;
+    stack<int> front,back;
     int q;
     cin >> q;
     while(q--) {
@@ -11,13 +11,13 @@ int main() {
         cin >> type;
         if(type == 1) {
             cin >> x;
-            rear.push(x);
+            back.push(x);
         }    
         else {
            if(front.empty()) { 
-               while(!rear.empty()) {
-                   front.push(rear.top());
-                   rear.pop();
+               while(!back.empty()) {
+                   front.push(back.top());
+                   back.pop();
                }   
             }    
            if(!front.empty()) {
