@@ -1,0 +1,15 @@
+Given Node struct as follows:
+	struct Node {
+		int data;
+		Node* left;
+		Node* right;
+	}
+//function below is to check is a Note type called node is a binary search tree with checking left subtree of a node is less than the current node data and right subtree of a node is greater than the current node data, and value of each not is ranging from min+1 to max-1.
+Bool Check (Node node, int min, int max)
+	If node is empty then return true
+	If (node->data) <= min or (note->data) >= max then return false
+	return (check(node->left, min, node->data) and check(node->left, min, node->data))
+//the function below is to check is root is a binary search tree with value ranging from 0 to 10000.
+Bool CheckBST (Node root)
+	Return check(root, -1, 10001)
+The complexity of this algorithm is O(h) with h is the heights of the tree.
