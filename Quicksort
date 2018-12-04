@@ -1,3 +1,5 @@
+explanation :
+--------------------------------------------------------------------------------------------------------------------------------------
 suppose we have array S[] to sort.
 The algorithm from book set the last unsorted element as pivot p.
 Index i is to check if all n - 1 elements smaller than pivot or not.
