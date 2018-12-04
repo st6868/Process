@@ -1,0 +1,46 @@
+Code (C++) :
+    Node * insert(Node * root, int value) {
+        if(root == NULL){
+            Node * node = new Node(value);
+            node->data = value;
+            node->left = NULL;
+            node->right = NULL;
+            root = node;
+            return root;
+        }
+        if(value < root->data)
+            root->left = insert(root->left, value);
+        else
+            root->right = insert(root->right, value);
+
+        return root;
+    }
+    
+    
+Algorithm (from Skiena) :
+insert_tree(tree **l, item_type x, tree *parent)
+{
+  tree *p;
+  /* temporary pointer */
+  if (*l == NULL) {
+    p = malloc(sizeof(tree)); /* allocate new node */
+    p->item = x;
+    p->left = p->right = NULL;
+    p->parent = parent;
+    *l = p;
+    /* link into parent’s record */
+    return;
+  }
+  if (x < (*l)->item)
+    insert_tree(&((*l)->left), x, *l);
+  else
+    insert_tree(&((*l)->right), x, *l);
+}
+
+To insert a value into a BST, we need to find the proper place. It is easy to find because
+BST already in an order where all value in the left subtree always smaller than the root and
+all value in the right subtree always smaller than the root. So when we have a value to insert,
+we start from the top, if null then insert at top, if smaller than the top, go to left subtree,
+and if bigger than the top, go to right subtree. We need to do this recursion until we find a
+null value. When we found this, create new node, set the value, and set null subtree. Congrats,
+we already insert a value to BST.
