@@ -1,4 +1,5 @@
 Code (C++) :
+--------------------------------------------------------------------------------------------------------------------------------------
     Node * insert(Node * root, int value) {
         if(root == NULL){
             Node * node = new Node(value);
@@ -15,9 +16,9 @@ Code (C++) :
 
         return root;
     }
-    
-    
+--------------------------------------------------------------------------------------------------------------------------------------
 Algorithm (from Skiena) :
+--------------------------------------------------------------------------------------------------------------------------------------
 insert_tree(tree **l, item_type x, tree *parent)
 {
   tree *p;
@@ -36,7 +37,9 @@ insert_tree(tree **l, item_type x, tree *parent)
   else
     insert_tree(&((*l)->right), x, *l);
 }
-
+--------------------------------------------------------------------------------------------------------------------------------------
+explanation :
+--------------------------------------------------------------------------------------------------------------------------------------
 To insert a value into a BST, we need to find the proper place. It is easy to find because
 BST already in an order where all value in the left subtree always smaller than the root and
 all value in the right subtree always smaller than the root. So when we have a value to insert,
