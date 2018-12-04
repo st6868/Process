@@ -45,5 +45,5 @@ BST already in an order where all value in the left subtree always smaller than 
 all value in the right subtree always smaller than the root. So when we have a value to insert,
 we start from the top, if null then insert at top, if smaller than the top, go to left subtree,
 and if bigger than the top, go to right subtree. We need to do this recursion until we find a
-null value. When we found this, create new node, set the value, and set null subtree. Congrats,
-we already insert a value to BST.
+null value in a proper place. When we found this, create new node, set the value, and set its
+subtree as null. then assign this new node to the main tree in the place we found before.
