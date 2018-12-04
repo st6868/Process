@@ -1,4 +1,5 @@
 Code (C++) :
+--------------------------------------------------------------------------------------------------------------------------------------
     void inOrder(Node *root) {
         if (root){
             inOrder(root->left);
@@ -6,9 +7,9 @@ Code (C++) :
             inOrder(root->right);
         }
     }
-
-
+--------------------------------------------------------------------------------------------------------------------------------------
 Algorithm (from skiena) :
+--------------------------------------------------------------------------------------------------------------------------------------
 void traverse_tree(tree *l)
 {
   if (l != NULL) {
@@ -17,7 +18,9 @@ void traverse_tree(tree *l)
     traverse_tree(l->right);
   }
 }
-
+--------------------------------------------------------------------------------------------------------------------------------------
+explanation :
+--------------------------------------------------------------------------------------------------------------------------------------
 In Binary Search Tree (BST), value smaller than the root lie in the left subtree of the root,
 and value greater than the root lie in the right subtree of the root. To make an in order traversal,
 the algorithm start with traversals to the left subtree to find the most left bottom subtree which
