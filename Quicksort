@@ -1,0 +1,148 @@
+suppose we have array S[] to sort.
+The algorithm from book set the last unsorted element as pivot p.
+Index i is to check if all n - 1 elements smaller than pivot or not.
+f is the divider position for pivot element, or all element before f all smaller than pivot element.
+steps:
+1. f value start from 0 at beginning of algorithm.
+2. when S[i] < S[p], we add one point to f, which mean f now at position 1, and position 0 of the array is less than pivot.
+3. we loop this for all n - 1 elements.
+4. At the end, we have all elements before f are smaller than pivot and all elements after f are greater than pivot. 
+   then, swap element S[f] and S[p] so now S[f] = pivot element
+5. To sort the array further, separates the array into two piles, (1) all elements before S[f] and (2) all elements after S[f]
+   (i dont do this because i cant make the recursion code properly (NonValue-Returning Function) and the problem from hackerrank
+   dont ask for it)
+6. do steps 2 - 5 until all groups have a single element.
+
+A little bit different from the book, the hackerrank problem ask to set the first element as pivot p. So, i start the looping from
+the end and set f as the end of elements at the beginning. each looping, if S[i] > S[f] then substract one from f. This algorithm
+work exactly same as above, but start from the end instead of 0. At the the end, we also have all elements before f are smaller than
+pivot and all elements after f are greater than pivot. The rest of the code are actually the same. :)
+--------------------------------------------------------------------------------------------------------------------------------------
+Algorithm (from skiena) :
+--------------------------------------------------------------------------------------------------------------------------------------
+quicksort(item_type s[], int l, int h)
+{
+  int p;
+  /* index of partition */
+  
+  if ((h-l)>0) {
+    p = partition(s,l,h);
+    quicksort(s,l,p-1);
+    quicksort(s,p+1,h);
+  }
+}
+--------------------------------------------------------------------------------------------------------------------------------------
+int partition(item_type s[], int l, int h)
+{
+  int i;
+  /* counter */
+  int p;
+  /* pivot element index */
+  int firsthigh;
+  /* divider position for pivot element */
+  p ==h;
+  firsthigh = l;
+  for (i=l; i<h; i++)
+    if (s[i] < s[p]) {
+    swap(&s[i],&s[firsthigh]);
+    firsthigh ++;
+    }
+  swap(&s[p],&s[firsthigh]);
+  return(firsthigh);
+}
+--------------------------------------------------------------------------------------------------------------------------------------
+Code (C++) :
+--------------------------------------------------------------------------------------------------------------------------------------
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<string> split_string(string);
+
+// Complete the quickSort function below.
+vector<int> quickSort(vector<int> arr, int l, int h) {
+    int i, p, firsthigh;
+    p = l;
+    firsthigh = h;
+    for (i = h; i > l; i--){
+        if(arr[i] > arr[p]){
+            int temp = arr[i];
+            arr[i] = arr[firsthigh];
+            arr[firsthigh] = temp;
+            firsthigh--;
+        }
+    }
+    int temp = arr[p];
+    arr[p] = arr[firsthigh];
+    arr[firsthigh] = temp;
+
+    return arr;
+}
+
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
+
+    vector<string> arr_temp = split_string(arr_temp_temp);
+
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        int arr_item = stoi(arr_temp[i]);
+
+        arr[i] = arr_item;
+    }
+
+    vector<int> result = quickSort(arr, 0, n-1);
+
+    for (int i = 0; i < result.size(); i++) {
+        fout << result[i];
+
+        if (i != result.size() - 1) {
+            fout << " ";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+vector<string> split_string(string input_string) {
+    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
+        return x == y and x == ' ';
+    });
+
+    input_string.erase(new_end, input_string.end());
+
+    while (input_string[input_string.length() - 1] == ' ') {
+        input_string.pop_back();
+    }
+
+    vector<string> splits;
+    char delimiter = ' ';
+
+    size_t i = 0;
+    size_t pos = input_string.find(delimiter);
+
+    while (pos != string::npos) {
+        splits.push_back(input_string.substr(i, pos - i));
+
+        i = pos + 1;
+        pos = input_string.find(delimiter, i);
+    }
+
+    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
+
+    return splits;
+}
